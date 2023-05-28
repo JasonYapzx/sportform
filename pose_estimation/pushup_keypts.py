@@ -16,7 +16,7 @@ accum_conf_right_back = 0
 # TODO test for longer frames?? to be more precise
 # Load a model
 model = YOLO('yolov8l-pose.pt')  
-video_path = "./pushup_flipped.mp4"
+video_path = "./pushup2.mp4"
 
 cap = cv2.VideoCapture(video_path) # create capture obj
 fps = cap.get(cv2.CAP_PROP_FPS) # float 'fps'
@@ -40,8 +40,8 @@ while cap.isOpened():
         angle_left_back,conf_left_back = findAngle(frame, keypts, 5,11,13,'left','back',draw=True) # draw limb for left arm and calc angle
         angle_right_back,conf_right_back = findAngle(frame, keypts, 6,12,14,'right','back',draw=True) # draw limb for right arm and calc angle
 
-        # print(f"Left arm angle:{angle_left_arm} (conf:{conf_left_arm})")
-        # print(f"Right arm angle:{angle_right_arm} (conf:{conf_right_arm})")
+        print(f"Left arm angle:{angle_left_arm} (conf:{conf_left_arm})")
+        print(f"Right arm angle:{angle_right_arm} (conf:{conf_right_arm})")
         # print(f"Left back angle:{angle_left_back} (conf:{conf_left_back})")
         # print(f"Right back angle:{angle_right_back} (conf:{conf_right_back})")
 
@@ -83,7 +83,7 @@ while cap.isOpened():
                     repCount += 1
 
 
-        # draw text 
+        # Draw Visuals
         font                   = cv2.FONT_HERSHEY_SIMPLEX
         topLeftOfScreen = (80,80)
         topMiddleOfScreen = (80,int(fh)-10)
@@ -93,7 +93,7 @@ while cap.isOpened():
         # thickness              = 3
         # lineType               = 2
 
-        cv2.rectangle(frame,(70,5),(150,85),
+        cv2.rectangle(frame,(70,5),(150,85), # draw counter bg
             rectangleColour,
             -1
         )
@@ -105,12 +105,12 @@ while cap.isOpened():
             3,
             2)
         
-        if straight_back == 0:
-            cv2.rectangle(frame,(70,int(fh)-60),(600,int(fh)),
+        if straight_back == 0: # draw straighten back warning
+            cv2.rectangle(frame,(70,int(fh)-60),(600,int(fh)), # draw warning bg
             (94,74,223),
             -1
         )
-            cv2.putText(frame,'Straighten Back', # draw counter
+            cv2.putText(frame,'Straighten Back', # draw warning
                 topMiddleOfScreen, 
                 font, 
                 2,
