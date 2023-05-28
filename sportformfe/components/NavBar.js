@@ -1,165 +1,85 @@
-import React from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { HiMenuAlt3 } from "react-icons/hi";
+import { MdOutlineDashboard, MdLogout } from "react-icons/md";
+import { AiOutlineUser } from "react-icons/ai";
+import React, { useState } from "react";
 
 import { getAuth } from "firebase/auth";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 
-export default function Navbar(props) {
-  const [navbarOpen, setNavbarOpen] = React.useState(false);
+export default function Navbar() {
+  const [open, setOpen] = useState(false);
   const auth = getAuth();
+  const [user, loading] = useAuthState(auth);
+
+  const menus = [
+    { name: "Dashboard", link: "/dashboard", icon: MdOutlineDashboard },
+    { name: "Profile Manager", link: "/profile/" , icon: AiOutlineUser },
+  ];
 
   return (
     <>
-      <nav
-        className={
-          (props.transparent
-            ? "top-0 absolute z-50 w-full"
-            : "relative shadow-lg bg-white shadow-lg") +
-          " flex flex-wrap items-center justify-between px-2 py-3 "
-        }
-      >
-        <div className="container px-4 mx-auto flex flex-wrap items-center justify-between">
-          <div className="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
-            <a
-              className={
-                (props.transparent ? "text-white" : "text-gray-800") +
-                " text-sm font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
-              }
-              href="https://www.creative-tim.com/learning-lab/tailwind-starter-kit#/presentation"
-            >
-              SportForm
-            </a>
-            <button
-              className="cursor-pointer text-xl leading-none px-3 py-1 border border-solid border-transparent rounded bg-transparent block lg:hidden outline-none focus:outline-none"
-              type="button"
-              onClick={() => setNavbarOpen(!navbarOpen)}
-            >
-              <i
-                className={
-                  (props.transparent ? "text-white" : "text-gray-800") +
-                  " fas fa-bars"
-                }
-              ></i>
-            </button>
+      <nav className="md:relative fixed hidden md:block">
+        <div
+          className={`bg-white min-h-screen ${open ? "w-72" : "w-16"} duration-500 text-gray-900 px-4`}
+        >
+          <div className="items-stretch py-7 px-2 flex justify-between ">
+            {open ? 
+              <Link href="/">
+                <Image src="/Logo1.svg" alt="logo" width={100} height={100} />
+              </Link> : <></> }
+            <HiMenuAlt3
+              size={16}
+              className="cursor-pointer"
+              onClick={() => setOpen(!open)} />
           </div>
-          <div
-            className={
-              "lg:flex flex-grow items-center bg-white lg:bg-transparent lg:shadow-none" +
-              (navbarOpen ? " block rounded shadow-lg" : " hidden")
-            }
-            id="example-navbar-warning"
-          >
-            <ul className="flex flex-col lg:flex-row list-none mr-auto">
-              <li className="flex items-center">
-                <a
-                  className={
-                    (props.transparent
-                      ? "lg:text-white lg:hover:text-gray-300 text-gray-800"
-                      : "text-gray-800 hover:text-gray-600") +
-                    " px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
-                  }
-                  href="https://www.creative-tim.com/learning-lab/tailwind-starter-kit#/profile"
+          <div className="mt-4 flex flex-col gap-4 relative">
+            {menus?.map((menu, i) => (
+              <Link
+                href={menu?.link}
+                key={i}
+                className={` ${menu?.margin && "mt-5"} group flex items-center text-lg gap-3.5 font-medium p-2 hover:bg-gray-600 rounded-md`}
+              >
+                <div>{React.createElement(menu?.icon, { size: "20" })}</div>
+                <h2
+                  style={{
+                    transitionDelay: `${i + 3}00ms`,
+                  }}
+                  className={`whitespace-pre duration-500 ${!open && "opacity-0 translate-x-28 overflow-x-hidden"}`}
                 >
-                  <i
-                    className={
-                      (props.transparent
-                        ? "lg:text-gray-300 text-gray-500"
-                        : "text-gray-500") +
-                      " far fa-file-alt text-lg leading-lg mr-2"
-                    }
-                  />{" "}
-                  Docs
-                </a>
-              </li>
-            </ul>
-            <ul className="flex flex-col lg:flex-row list-none lg:ml-auto">
-              <li className="flex items-center">
-                <a
-                  className={
-                    (props.transparent
-                      ? "lg:text-white lg:hover:text-gray-300 text-gray-800"
-                      : "text-gray-800 hover:text-gray-600") +
-                    " px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
-                  }
-                  href="#pablo"
+                  {menu?.name}
+                </h2>
+                <h2
+                  className={`${open && "hidden"} absolute left-48 bg-white font-semibold whitespace-pre text-gray-900 rounded-md drop-shadow-lg px-0 py-0 w-0 overflow-hidden group-hover:px-2 group-hover:py-1 group-hover:left-14 group-hover:duration-300 group-hover:w-fit  `}
                 >
-                  <i
-                    className={
-                      (props.transparent
-                        ? "lg:text-gray-300 text-gray-500"
-                        : "text-gray-500") +
-                      " fab fa-facebook text-lg leading-lg "
-                    }
-                  />
-                  <span className="lg:hidden inline-block ml-2">Share</span>
-                </a>
-              </li>
-
-              <li className="flex items-center">
-                <a
-                  className={
-                    (props.transparent
-                      ? "lg:text-white lg:hover:text-gray-300 text-gray-800"
-                      : "text-gray-800 hover:text-gray-600") +
-                    " px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
-                  }
-                  href="#pablo"
+                  {menu?.name}
+                </h2>
+              </Link>
+            ))}
+            <button
+                onClick={() => auth.signOut()}
+                className={`group flex items-center text-lg gap-3.5 font-medium p-2 capitalize bg-white border-white text-gray-900 hover:bg-gray-600 rounded-md`}
+              >
+                <div>{React.createElement(MdLogout, { size: "20" })}</div>
+                <h2
+                  style={{
+                    transitionDelay: `${11}00ms`,
+                  }}
+                  className={`whitespace-pre duration-500 ${!open && "opacity-0 translate-x-28 overflow-hidden"}`}
                 >
-                  <i
-                    className={
-                      (props.transparent
-                        ? "lg:text-gray-300 text-gray-500"
-                        : "text-gray-500") +
-                      " fab fa-twitter text-lg leading-lg "
-                    }
-                  />
-                  <span className="lg:hidden inline-block ml-2">Tweet</span>
-                </a>
-              </li>
-
-              <li className="flex items-center">
-                <a
-                  className={
-                    (props.transparent
-                      ? "lg:text-white lg:hover:text-gray-300 text-gray-800"
-                      : "text-gray-800 hover:text-gray-600") +
-                    " px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
-                  }
-                  href="#pablo"
+                  Logout
+                </h2>
+                <h2
+                  className={`${open && "hidden"} absolute left-48 bg-white font-semibold whitespace-pre text-gray-900 rounded-md drop-shadow-lg px-0 py-0 w-0 overflow-hidden group-hover:px-2 group-hover:py-1 group-hover:left-14 group-hover:duration-300 group-hover:w-fit  `}
                 >
-                  <i
-                    className={
-                      (props.transparent
-                        ? "lg:text-gray-300 text-gray-500"
-                        : "text-gray-500") +
-                      " fab fa-github text-lg leading-lg "
-                    }
-                  />
-                  <span className="lg:hidden inline-block ml-2">Star</span>
-                </a>
-              </li>
-
-              <li className="flex items-center">
-                <button
-                  className={
-                    (props.transparent
-                      ? "bg-white text-gray-800 active:bg-gray-100"
-                      : "bg-orange-400 text-white active:bg-orange-600") +
-                    " text-xs font-bold uppercase px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3"
-                  }
-                  type="button"
-                  style={{ transition: "all .15s ease" }}
-                  onClick={() => {
-                    console.log("signout");
-                    auth.signOut();}}
-                >
-
-                  <i className="fas fa-arrow-alt-circle-down"></i> Signout
-                </button>
-              </li>
-            </ul>
+                  Logout
+                </h2>
+              </button>
           </div>
         </div>
       </nav>
     </>
-  );
+  )
 }

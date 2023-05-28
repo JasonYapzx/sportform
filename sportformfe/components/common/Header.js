@@ -1,5 +1,9 @@
 import React from "react";
 
+import Image from "next/image";
+import logo from "../../public/Logo1.svg";
+
+
 export default function Header({ handleChild }) {
   const [navbarOpen, setNavbarOpen] = React.useState(false);
 
@@ -11,9 +15,12 @@ export default function Header({ handleChild }) {
             href="/"
             className="text-lg font-semibold rounded-lg tracking-widest focus:outline-none focus:shadow-outline"
           >
-            <h1 className="text-4xl Avenir tracking-tighter text-gray-900 md:text-4x1 lg:text-3xl">
-              SportForm
-            </h1>
+              <Image
+                height={152}
+                width={152}
+                src={logo}
+                alt="Logo"
+              />
           </a>
           <button
             className="text-white cursor-pointer leading-none px-3 py-1 md:hidden outline-none focus:outline-none "
@@ -41,7 +48,7 @@ export default function Header({ handleChild }) {
         </div>
         <div
           className={
-            "md:flex flex-grow items-center" +
+            "md:flex flex-grow items-center z-10" +
             (navbarOpen ? " flex" : " hidden")
           }
         >
@@ -49,15 +56,7 @@ export default function Header({ handleChild }) {
             <ul className="flex flex-grow justify-end flex-wrap items-center">
               <li>
                 <a
-                  href="/"
-                  className="font-medium text-gray-600 hover:text-gray-900 px-5 py-3 flex items-center transition duration-150 ease-in-out"
-                >
-                  Careers
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/"
+                  href="/aboutus"
                   className="font-medium text-gray-600 hover:text-gray-900 px-5 py-3 flex items-center transition duration-150 ease-in-out"
                 >
                   About Us
