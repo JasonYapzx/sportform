@@ -1,7 +1,7 @@
 import math
 import cv2
 
-def findAngle(img, keypts, p1,p2,p3, draw=True):
+def findAngle(img, keypts, p1,p2,p3, side, part, draw = True):
     coord = []
     no_keypts = len(keypts)
     for i in range(no_keypts):
@@ -24,10 +24,20 @@ def findAngle(img, keypts, p1,p2,p3, draw=True):
         angle = -1*(angle-360)
 
     if draw:
-        cv2.line(img,(int(x1),int(y1)),(int(x2),int(y2)), (255,255,255) , 3)
-        cv2.line(img,(int(x2),int(y2)),(int(x3),int(y3)), (255,255,255) , 3)
-        cv2.circle(img, (int(x1),int(y1)), 10, (255,255,255), cv2.FILLED)
-        cv2.circle(img, (int(x2),int(y2)), 10, (255,255,255), cv2.FILLED)
-        cv2.circle(img, (int(x3),int(y3)), 10, (255,255,255), cv2.FILLED)
+        if part == "back":
+            cv2.circle(img, (int(x1),int(y1)), 10, (255,255,255), cv2.FILLED)
+            cv2.circle(img, (int(x2),int(y2)), 10, (255,255,255) , cv2.FILLED)
+            cv2.circle(img, (int(x3),int(y3)), 10, (255,255,255) , cv2.FILLED)
+        if part == "arm":
+            cv2.circle(img, (int(x1),int(y1)), 10, (255,255,255), cv2.FILLED)
+            cv2.circle(img, (int(x2),int(y2)), 10, (255,255,255), cv2.FILLED)
+            cv2.circle(img, (int(x3),int(y3)), 10, (255,255,255), cv2.FILLED)
+
+        if side == "left":
+            cv2.line(img,(int(x1),int(y1)),(int(x2),int(y2)), (220,132,72) , 3)
+            cv2.line(img,(int(x2),int(y2)),(int(x3),int(y3)), (220,132,72)  , 3)
+        if side == "right":
+            cv2.line(img,(int(x1),int(y1)),(int(x2),int(y2)), (72,220,122) , 3)
+            cv2.line(img,(int(x2),int(y2)),(int(x3),int(y3)), (72,220,122) , 3)
 
     return int(angle),ave_conf
