@@ -19,7 +19,7 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-let firebase_app = initializeApp(firebaseConfig);
+const firebase_app = initializeApp(firebaseConfig);
 
 
 // Initialize Firebase Authentication and get a reference to the service
