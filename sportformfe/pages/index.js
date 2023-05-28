@@ -1,6 +1,5 @@
 import React from 'react';
 
-import { initFirebase } from '@/firebase/config'
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 
@@ -10,7 +9,6 @@ import Header from '@/components/common/Header';
 import Footer from '@/components/common/Footer';
 
 export default function Home() {
-  const app = initFirebase();
   const provider = new GoogleAuthProvider();
   const auth = getAuth();
   const [user, loading] = useAuthState(auth);
