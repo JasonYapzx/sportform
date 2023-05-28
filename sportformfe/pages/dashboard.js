@@ -21,6 +21,7 @@ export default function Dashboard() {
     return <div>Please sign in to continue</div>
   }
 
+  
   return (
     <>
       <Navbar transparent />
