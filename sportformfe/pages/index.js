@@ -1,16 +1,15 @@
 import React from 'react';
 
-import { initFirebase } from '@/firebase/config'
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 import Header from '@/components/common/Header';
 import Footer from '@/components/common/Footer';
 
 export default function Home() {
-  const app = initFirebase();
   const provider = new GoogleAuthProvider();
   const auth = getAuth();
   const [user, loading] = useAuthState(auth);
@@ -35,16 +34,16 @@ export default function Home() {
               Improve your form
             </h1>
             <p className="mb-4 xl:w-3/4 text-gray-600 text-lg">
-              Sportform is a free to use social sporting application, where you can connect
+              Sportform is  free to use social sporting application, where you can connect
               with other sportmen, receive feedback about your form and even join live workouts!
             </p>
             <div className="flex justify-center">
-              <a
+              <Link
                 className="inline-flex items-center px-5 py-3 mt-2 font-medium text-black transition duration-500 ease-in-out transform bg-transparent border rounded-lg bg-gray-900"
                 href="https://github.com/JasonYapzx/sportform"
               >
                 <span className="justify-center">Find out more</span>
-              </a>
+              </Link>
             </div>
           </div>
           <div className="xl:mr-44 sm:mr-0 sm:mb-28 mb-0 lg:mb-0 mr-48 md:pl-10">
@@ -111,12 +110,12 @@ export default function Home() {
                 autoComplete="email"
                 className="border border-gray-600 w-1/4 pr-2 pl-2 py-3 mt-2 rounded-md text-gray-800 font-semibold hover:border-gray-900"
               ></input>{" "}
-              <a
+              <Link
                 className="inline-flex items-center px-14 py-3 mt-2 ml-2 font-medium text-black transition duration-500 ease-in-out transform bg-transparent border rounded-lg bg-gray-900"
                 href="/"
               >
                 <span className="justify-center">Subscribe</span>
-              </a>
+              </Link>
             </div>
           </div>
         </section>

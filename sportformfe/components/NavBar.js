@@ -21,7 +21,7 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="md:relative fixed hidden md:block">
+      <nav className="md:relative fixed md:block">
         <div
           className={`bg-white min-h-screen ${open ? "w-72" : "w-16"} duration-500 text-gray-900 px-4`}
         >
