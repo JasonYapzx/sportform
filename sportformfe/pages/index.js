@@ -19,7 +19,7 @@ export default function Home() {
   }
 
   if (user) {
-    router.push("/dashboard");
+    router.push("/home");
   }
 
   const signIn = async () => {
