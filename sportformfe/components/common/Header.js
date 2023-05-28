@@ -1,6 +1,7 @@
 import React from "react";
 
 import Image from "next/image";
+import Link from "next/link";
 import logo from "../../public/Logo1.svg";
 
 
@@ -11,7 +12,7 @@ export default function Header({ handleChild }) {
     <div className="fixed top-0 w-full z-30 clearNav md:bg-opacity-90 transition duration-300 ease-in-out">
       <div className="flex flex-col max-w-6xl px-4 mx-auto md:items-center md:justify-between md:flex-row md:px-6 lg:px-8">
         <div className="flex flex-row items-center justify-between p-4">
-          <a
+          <Link
             href="/"
             className="text-lg font-semibold rounded-lg tracking-widest focus:outline-none focus:shadow-outline"
           >
@@ -21,7 +22,7 @@ export default function Header({ handleChild }) {
                 src={logo}
                 alt="Logo"
               />
-          </a>
+          </Link>
           <button
             className="text-white cursor-pointer leading-none px-3 py-1 md:hidden outline-none focus:outline-none "
             type="button"
@@ -55,15 +56,15 @@ export default function Header({ handleChild }) {
           <nav className="flex-col flex-grow ">
             <ul className="flex flex-grow justify-end flex-wrap items-center">
               <li>
-                <a
+                <Link
                   href="/aboutus"
                   className="font-medium text-gray-600 hover:text-gray-900 px-5 py-3 flex items-center transition duration-150 ease-in-out"
                 >
                   About Us
-                </a>
+                </Link>
               </li>
               <button onClick={() => handleChild()}>
-                <a
+                <div
                   className="inline-flex items-center px-4 py-2 mt-2 font-medium text-black transition duration-500 ease-in-out transform bg-transparent rounded-lg text-md md:mt-0 md:ml-4 bg-gray-900"
                 >
                   <span className="justify-center">Sign In</span>
@@ -77,7 +78,7 @@ export default function Header({ handleChild }) {
                       fillRule="nonzero"
                     />
                   </svg>
-                </a>
+                </div>
               </button>
             </ul>
           </nav>

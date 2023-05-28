@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Footer() {
     return (
       <footer className="pb-4">
@@ -5,53 +7,53 @@ export default function Footer() {
           <div className="flex flex-col-reverse justify-between pt-5 pb-4 pl-4 border-t lg:flex-row bg-top border-black">
             <ul className="flex flex-col space-y-2 lg:mb-0 sm:space-y-0 sm:space-x-5 sm:flex-row">
               <li>
-                <a
+                <Link
                   href="/"
                   className="text-md text-black transition-colors duration-300 hover:text-deep-purple-accent-400 font-semibold"
                 >
                   Terms of Service
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   href="/"
                   className="text-md text-black transition-colors duration-300 hover:text-deep-purple-accent-400 font-semibold"
                 >
                   Privacy Policy
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   href="/"
                   className="text-md text-black transition-colors duration-300 hover:text-deep-purple-accent-400 font-semibold"
                 >
                   Ad Choices
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   href="/"
                   className="text-md text-black transition-colors duration-300 hover:text-deep-purple-accent-400 font-semibold"
                 >
                   Cookie Policy
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   href="/"
                   className="text-md text-black transition-colors duration-300 hover:text-deep-purple-accent-400 font-semibold"
                 >
                   Partners
-                </a>
+                </Link>
               </li>
             </ul>
             <ul className="flex flex-col mb-3 space-y-2 lg:mb-0 sm:space-y-0 sm:space-x-5 sm:flex-row">
-              <a
+              <Link
                 href="/"
                 className="text-md text-black transition-colors duration-300 hover:text-deep-purple-accent-400 font-semibold tracking-tight"
               >
                 © 2023 Company Inc.
-              </a>
+              </Link>
             </ul>
           </div>
         </div>
