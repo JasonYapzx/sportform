@@ -8,7 +8,7 @@ bottom = 0 # 0 is false 1 is true
 
 # Load a model
 model = YOLO('yolov8l-pose.pt')  
-video_path = "./pushup2.mp4"
+video_path = "./situp2.mp4"
 
 cap = cv2.VideoCapture(video_path) # create capture obj
 fps = cap.get(cv2.CAP_PROP_FPS) # float 'fps'
