@@ -9,80 +9,80 @@ import Page from "@/components/common/Page";
 import Img from "../public/default.png";
 import ForumPost from "@/components/ForumPost";
 
-const posts = [
-  {
-      type: "Push Up",
+const types = ["Sit Up", "Push Up"];
+
+const getRandomNumber = (min, max) => {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+};
+
+const generateDummyData = (count) => {
+  const summaryPoints = [
+    // General fitness benefits
+    "Increased strength and endurance",
+    "Improved flexibility and posture",
+    "Burned calories and reduced body fat",
+    "Boosted energy levels",
+    "Enhanced cardiovascular health",
+    "Stronger core and muscles",
+    "Reduced stress and improved mood",
+    "Better sleep quality",
+    "Increased self-confidence",
+
+    // Push Up benefits
+    "Targets chest, shoulders, and triceps",
+    "Improves upper body strength",
+    "Engages core muscles for stability",
+    "Can be modified for different fitness levels",
+    "Enhances overall muscular definition",
+
+    // Sit Up benefits
+    "Targets abdominal muscles",
+    "Strengthens core and hip flexors",
+    "Improves posture and spinal alignment",
+    "Enhances overall core stability",
+    "Can be performed without equipment",
+
+    // Cardio benefits
+    "Improves heart health and circulation",
+    "Burns calories and aids in weight loss",
+    "Increases lung capacity and oxygen efficiency",
+    "Reduces the risk of chronic diseases",
+    "Boosts metabolism for all-day calorie burn",
+
+    // Eating healthy benefits
+    "Provides essential nutrients for overall health",
+    "Maintains a healthy weight",
+    "Supports proper digestion and gut health",
+    "Boosts the immune system",
+    "Reduces the risk of chronic diseases"
+  ];
+
+  const posts = [];
+
+  for (let i = 0; i < count; i++) {
+    const type = types[getRandomNumber(0, types.length - 1)];
+    const likes = getRandomNumber(0, 100);
+    const comments = getRandomNumber(0, 50);
+
+    const shuffledSummaryPoints = summaryPoints.sort(() => 0.5 - Math.random());
+    const randomSummary = shuffledSummaryPoints.slice(0, getRandomNumber(1, 3));
+
+    const post = {
+      type,
       imageURL: "../public/assets/Images/crying.jpg",
-      title: "Push Up Post 1",
-      summary: [
-          "Summary point 1",
-          "Summary point 2",
-          "Summary point 3"
-      ],
-      likes: 100,
-      comments: 50
-  },
-  {
-      type: "Sit Up",
-      imageURL: "../public/assets/Images/crying.jpg",
-      title: "Sit Up Post 1",
-      summary: [
-          "Summary point 1",
-          "Summary point 2",
-          "Summary point 3"
-      ],
-      likes: 50,
-      comments: 20
-  },
-  {
-    type: "Sit Up",
-    imageURL: "../public/assets/Images/crying.jpg",
-    title: "Sit Up Post 1",
-    summary: [
-        "Summary point 1",
-        "Summary point 2",
-        "Summary point 3"
-    ],
-    likes: 50,
-    comments: 20
-  },
-  {
-    type: "Sit Up",
-    imageURL: "../public/assets/Images/crying.jpg",
-    title: "Sit Up Post 1",
-    summary: [
-        "Summary point 1",
-        "Summary point 2",
-        "Summary point 3"
-    ],
-    likes: 50,
-    comments: 20
-  },
-  {
-    type: "Sit Up",
-    imageURL: "../public/assets/Images/crying.jpg",
-    title: "Sit Up Post 1",
-    summary: [
-        "Summary point 1",
-        "Summary point 2",
-        "Summary point 3"
-    ],
-    likes: 50,
-    comments: 20
-  },
-  {
-    type: "Sit Up",
-    imageURL: "../public/assets/Images/crying.jpg",
-    title: "Sit Up Post 1",
-    summary: [
-        "Summary point 1",
-        "Summary point 2",
-        "Summary point 3"
-    ],
-    likes: 50,
-    comments: 20
-}
-]
+      title: `${type} Post ${i + 1}`,
+      summary: randomSummary,
+      likes,
+      comments
+    };
+
+    posts.push(post);
+  }
+
+  return posts;
+};
+
+const posts = generateDummyData(10);
 
 export default function Dashboard() {
   const auth = getAuth();
