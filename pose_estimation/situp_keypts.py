@@ -1,6 +1,7 @@
 import cv2
 from ultralytics import YOLO
 from funcs import findAngle
+from funcs import findDist
 import argparse
 
 # arg parser
@@ -8,16 +9,15 @@ parser = argparse.ArgumentParser(description='Input: 16/9 horizontal video of pu
 parser.add_argument("-s","--source", help="video input path", type=str,required=True)
 args = parser.parse_args()
 
-
 repCount = 0 
 direction = 0 # 0 is pos direction (down), 1 is neg direction (up)
 middle = 0 # middle of rep (0 is false 1 is true)
-good_form = 0 # 0 is not good form, 1 is good form
+good_form = 0
 frameCount = 0
-accum_conf_left_arm = 0
-accum_conf_right_arm = 0
-accum_conf_left_back = 0
-accum_conf_right_back = 0
+accum_conf_left_ear = 0
+accum_conf_right_ear = 0
+accum_conf_left_knee = 0
+accum_conf_right_knee = 0
 
 
 # TODO test for longer frames?? to be more precise
@@ -42,37 +42,51 @@ while cap.isOpened():
         output = model(frame) # pass frame through model
         keypts = output[0].keypoints[0].cpu().detach().numpy() # get keypoints from tensor
 
-        angle_left_arm,conf_left_arm = findAngle(frame, keypts, 5,7,9,'left',draw=True) # draw limb for left arm and calc angle
-        angle_right_arm,conf_right_arm = findAngle(frame, keypts, 6,8,10,'right',draw=True) # draw limb for right arm and calc angle
-        # print(f"Left arm angle:{angle_left_arm} (conf:{conf_left_arm})")
-        # print(f"Right arm angle:{angle_right_arm} (conf:{conf_right_arm})")
-
         angle_left_back,conf_left_back = findAngle(frame, keypts, 5,11,13,'left',draw=True) # draw limb for left arm and calc angle
         angle_right_back,conf_right_back = findAngle(frame, keypts, 6,12,14,'right',draw=True) # draw limb for right arm and calc angle
-        angle_ave_back = (angle_right_back + angle_left_back)/2 
-        # print(f"Left back angle:{angle_left_back} (conf:{conf_left_back})")
-        # print(f"Right back angle:{angle_right_back} (conf:{conf_right_back})")
+        angle_ave_back = (angle_left_back + angle_right_back) / 2
+        print(f"Left back angle:{angle_left_back} (conf:{conf_left_back})")
+        print(f"Right back angle:{angle_right_back} (conf:{conf_right_back})")
+        print(f"Ave back angle:{angle_ave_back}")
+
+        # knee distance to elbow dont work too well, stick to angle
+        # dist_left_knee, conf_left_knee = findDist(frame,keypts,7,13,'left', draw=True)
+        # dist_right_knee, conf_right_knee = findDist(frame,keypts,8,14,'right', draw=True)
+        # print(f"Left knee dist:{dist_left_knee} (conf:{conf_left_knee})")
+        # print(f"Right knee dist:{dist_right_knee} (conf:{conf_right_knee})")
+
+        dist_left_ear, conf_left_ear = findDist(frame,keypts,3,9,'left', draw=True)
+        dist_right_ear, conf_right_ear = findDist(frame,keypts,4,10,'right', draw=True)
+        # print(f"Left ear dist:{dist_left_ear} (conf:{conf_left_ear})")
+        # print(f"Right ear dist:{dist_right_ear} (conf:{conf_right_ear})")
 
 
         if frameCount < round(fps * 0.5): # for first 0.5s calibrate confidence on which side
-            accum_conf_left_arm += conf_left_arm
-            accum_conf_right_arm += conf_right_arm
+            accum_conf_left_ear += conf_left_ear
+            accum_conf_right_ear += conf_right_ear
+            # accum_conf_left_knee += conf_left_knee
+            # accum_conf_right_knee += conf_right_knee
 
-        #logical flow for straight back detector
-        if angle_ave_back > 200 or angle_ave_back < 160:
+        # if accum_conf_right_knee > accum_conf_left_knee:
+        #     dist_knee = dist_right_knee
+        # else:
+        #     dist_knee = dist_left_knee
+            
+        if accum_conf_right_ear > accum_conf_left_ear:
+            dist_ear = dist_right_ear
+        else:
+            dist_ear = dist_left_ear
+
+        #logical flow for hands at ears detector
+        if dist_ear > 200:
             good_form = 0
         else:
             good_form = 1
 
-        #logical flow for pushup counter
-        if accum_conf_right_arm > accum_conf_left_arm: # use more confident side to check
-            angle_arm = angle_right_arm
-        else:
-            angle_arm = angle_left_arm
-
-        if angle_arm < 85 and good_form:
+        #logical flow for situpcounter
+        if angle_ave_back < 60 and good_form:
             middle = 1
-        if angle_arm > 150:
+        if angle_ave_back > 120:
             middle = 0    
         if middle:
             if direction == 0:
@@ -81,6 +95,7 @@ while cap.isOpened():
             if direction == 1:
                 direction = 0
                 repCount += 1
+
 
         # Draw Visuals
         font                   = cv2.FONT_HERSHEY_SIMPLEX
@@ -104,12 +119,12 @@ while cap.isOpened():
             3,
             2)
         
-        if good_form == 0: # draw straighten back warning
-            cv2.rectangle(frame,(70,660),(600,720), # draw warning bg
+        if good_form == 0: # draw warning
+            cv2.rectangle(frame,(70,660),(735,720), # draw warning bg
             (94,74,223),
             -1)
 
-            cv2.putText(frame,'Straighten Back', # draw warning
+            cv2.putText(frame,'Place hands at ears', # draw warning
                 topMiddleOfScreen, 
                 font, 
                 2,
@@ -117,6 +132,7 @@ while cap.isOpened():
                 2,
                 2)
 
+        
         # Write the frame into the file 'output.avi' 
         out.write(frame)
     

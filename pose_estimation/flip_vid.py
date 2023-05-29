@@ -1,6 +1,12 @@
 import cv2
 from ultralytics import YOLO
 from funcs import findAngle
+import argparse
+
+# arg parser
+parser = argparse.ArgumentParser(description='Input: 16/9 horizontal video of pushups // Output: video of pushup with keypts')
+parser.add_argument("-s","--source", help="video input path", type=str,required=True)
+args = parser.parse_args()
 
 repCount = 0 
 direction = 0 # 0 is down 1 is up
@@ -8,7 +14,7 @@ bottom = 0 # 0 is false 1 is true
 
 # Load a model
 model = YOLO('yolov8l-pose.pt')  
-video_path = "./pushup2.mp4"
+video_path = args.source
 
 cap = cv2.VideoCapture(video_path) # create capture obj
 fps = cap.get(cv2.CAP_PROP_FPS) # float 'fps'
