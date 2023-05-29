@@ -2,7 +2,7 @@
 function ForumPost({post}) {
     // TODO: Implement liking and commenting functionality
     return (
-        <div className="bg-gray-200 flex flex-col rounded-lg p-8 m-1">
+        <div className="bg-gray-200 flex flex-col rounded-lg p-8 m-1 w-[15vw]">
             {/* Post Image */}
             <img src={post.imageURL} alt={post.title}/>
 
