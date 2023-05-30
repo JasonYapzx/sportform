@@ -114,8 +114,8 @@ In the future, there is a possibility of training deep neural networks for diffe
 The implementation of our pose estimation scripts are in a Python>=3.7 environment with [PyTorch>=1.7](https://pytorch.org/get-started/locally/) (ensure CUDA is enabled).
 
 Other requirements will be installed together with YOLO by ultralytics, refer to their [documentation](https://github.com/ultralytics/ultralytics) for more information.
-```pip
-install ultralytics
+```sh
+pip install ultralytics
 ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
