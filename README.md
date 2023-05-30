@@ -93,11 +93,13 @@ SportForm generates annotations on user-uploaded videos, providing counts of suc
 
 <p align="center">
   <img src="./pose_estimation/gifs/pushup_rep.gif" />
+  <br />
   Repetition Counter
 </p>
-
+<br />
 <p align="center">
   <img src="./pose_estimation/gifs/pushup_form.gif" />
+  <br />
   Form Checker
 </p>
 
@@ -112,8 +114,9 @@ In the future, there is a possibility of training deep neural networks for diffe
 The implementation of our pose estimation scripts are in a Python>=3.7 environment with [PyTorch>=1.7](https://pytorch.org/get-started/locally/) (ensure CUDA is enabled).
 
 Other requirements will be installed together with YOLO by ultralytics, refer to their [documentation](https://github.com/ultralytics/ultralytics) for more information.
-
-`pip install ultralytics`
+```pip
+install ultralytics
+```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -124,13 +127,18 @@ Other requirements will be installed together with YOLO by ultralytics, refer to
 Our script to generate video with annotations can be used from the Command Line Interface (CLI).
 
 1. Enter the directory `/path/to/sportform/pose_estimation`
-   `cd /path/to/sportform/pose_estimation`
+   ```cd /path/to/sportform/pose_estimation
+   ```
    
 2. Try video generation with our example for pushups
-   `python3 pushup_keypts.py -s=./pushup.mp4`
+   ```python3
+   pushup_keypts.py -s=./pushup.mp4
+   ```
    
 3. Try video generation with our example for situps
-   `python3 situp_keypts.py -s=./situp.mp4`
+   ```python3
+   situp_keypts.py -s=./situp.mp4
+   ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
