@@ -86,9 +86,18 @@ _Below is an example of how you can instruct your audience on installing and set
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
+
 ## Pose Estimation
 
 SportForm generates annotations on user-uploaded videos, providing counts of successful repetitions for various exercises and checking the form of those exercises. It achieves this by utilizing a state-of-the-art object detection and pose estimation model, YOLOv8l-pose, developed by [ultralytics](https://github.com/ultralytics/ultralytics).This model accurately detects and generates 17 keypoints on the human body, including joints and facial features like ears.
+
+<p align="center">
+  <img src="./pose_estimation/gifs/pushup_rep.gif" />
+</p>
+
+<p align="center">
+  <img src="./pose_estimation/gifs/pushup_form.gif" />
+</p>
 
 SportForm takes in video uploads from users and utilizes the model to generate the coordinates of keypoints. By analyzing these keypoints, we calculate the necessary angles and distances to accurately evaluate exercise form and count repetitions.
 
@@ -96,36 +105,29 @@ In the future, there is a possibility of training deep neural networks for diffe
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
+### Prerequisites
 
-## Installation
+The implementation of our pose estimation scripts are in a Python>=3.7 environment with [PyTorch>=1.7](https://pytorch.org/get-started/locally/) (ensure CUDA is enabled).
 
-The implementation of our pose estimation scripts are in a Python>=3.7 environment with PyTorch>=1.7.
-
-Please do install CUDA enabled [PyTorch](https://pytorch.org/get-started/locally/) where applicable to speed up the inference.
-
-For the other requirements, refere to [YOLOv8 documentaion](https://github.com/ultralytics/ultralytics) by ultralytics
+Other requirements will be installed together with YOLO by ultralytics, refer to their [documentation](https://github.com/ultralytics/ultralytics) for more information.
 
 `pip install ultralytics`
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
+### Usage
 
-## Usage
-
-### CLI
+#### CLI
 
 Our script to generate video with annotations can be used from the Command Line Interface (CLI).
 
-First enter the directory `/path/to/sportform/pose_estimation` using
-
+1. Enter the directory `/path/to/sportform/pose_estimation
 `cd /path/to/sportform/pose_estimation`
 
-You can try our example video generation for pushups using:
-
+2. Try video generation with our example for pushups
 `python3 pushup_keypts.py -s=./pushup.mp4`
 
-and for situps using:
-
+3. Try video generation with our example for situps
 `python3 situp_keypts.py -s=./situp.mp4`
 
 <p align="right">(<a href="#top">back to top</a>)</p>
