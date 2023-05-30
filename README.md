@@ -94,13 +94,13 @@ SportForm generates annotations on user-uploaded videos, providing counts of suc
 <p align="center">
   <img src="./pose_estimation/gifs/pushup_rep.gif" />
   <br />
-  Repetition Counter
+   <figcaption>Repetition Counter</figcaption>
 </p>
 <br />
 <p align="center">
   <img src="./pose_estimation/gifs/pushup_form.gif" />
   <br />
-  Form Checker
+   <figcaption>Form Checker</figcaption>
 </p>
 
 SportForm takes in video uploads from users and utilizes the model to generate the coordinates of keypoints. By analyzing these keypoints, we calculate the necessary angles and distances to accurately evaluate exercise form and count repetitions.
@@ -127,18 +127,18 @@ install ultralytics
 Our script to generate video with annotations can be used from the Command Line Interface (CLI).
 
 1. Enter the directory `/path/to/sportform/pose_estimation`
-   ```cd
-   /path/to/sportform/pose_estimation
+   ```sh
+   cd /path/to/sportform/pose_estimation
    ```
    
 2. Try video generation with our example for pushups
-   ```python3
-   pushup_keypts.py -s=./pushup.mp4
+   ```sh
+   python3 pushup_keypts.py -s=./pushup.mp4
    ```
    
 3. Try video generation with our example for situps
-   ```python3
-   situp_keypts.py -s=./situp.mp4
+   ```sh
+   python3 situp_keypts.py -s=./situp.mp4
    ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
