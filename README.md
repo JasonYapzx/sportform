@@ -88,13 +88,11 @@ _Below is an example of how you can instruct your audience on installing and set
 
 ## Pose Estimation
 
-SportForm uses state of the art object detection and pose estimation model to generate 17 key points including left and right shoulders to ankles.
+SportForm generates annotations on user-uploaded videos, providing counts of successful repetitions for various exercises and checking the form of those exercises. It achieves this by utilizing a state-of-the-art object detection and pose estimation model, YOLOv8l-pose, developed by [ultralytics](https://github.com/ultralytics/ultralytics).This model accurately detects and generates 17 keypoints on the human body, including joints and facial features like ears.
 
-We utilise the YOLOv8l-pose model from [ultralytics](https://github.com/ultralytics/ultralytics) which is accurate yet fast.
+SportForm takes in video uploads from users and utilizes the model to generate the coordinates of keypoints. By analyzing these keypoints, we calculate the necessary angles and distances to accurately evaluate exercise form and count repetitions.
 
-We then pass the video uploads from our users through the model and generate the location of the keypoints. These keypoints are used to calculate different angles and distances to determine the number of repitions and the form of different exercises.
-
-In the future, there could be a possiblity to train deep neural networks for specific exercises to determine the number of repitions and the form. However, as of right now it is out of our scope as consumes too much time and resources.
+In the future, there is a possibility of training deep neural networks for differnet catagories of exercises to accurately determine repetition count and evaluate form. However, at present, this endeavor is beyond our scope as it requires significant time and resources.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
