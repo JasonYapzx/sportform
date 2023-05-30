@@ -140,6 +140,7 @@ Our script to generate video with annotations can be used from the Command Line 
    ```sh
    python3 situp_keypts.py -s=./situp.mp4
    ```
+The output video will be generated in the same directory with`_kpt` appended to the video name.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
