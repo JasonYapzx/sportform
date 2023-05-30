@@ -94,13 +94,13 @@ SportForm generates annotations on user-uploaded videos, providing counts of suc
 <p align="center">
   <img src="./pose_estimation/gifs/pushup_rep.gif" />
   <br />
-   <figcaption>Repetition Counter</figcaption>
+   Repetition Counter
 </p>
 <br />
 <p align="center">
   <img src="./pose_estimation/gifs/pushup_form.gif" />
   <br />
-   <figcaption>Form Checker</figcaption>
+  Form Checker
 </p>
 
 SportForm takes in video uploads from users and utilizes the model to generate the coordinates of keypoints. By analyzing these keypoints, we calculate the necessary angles and distances to accurately evaluate exercise form and count repetitions.
