@@ -93,10 +93,12 @@ SportForm generates annotations on user-uploaded videos, providing counts of suc
 
 <p align="center">
   <img src="./pose_estimation/gifs/pushup_rep.gif" />
+  Repetition Counter
 </p>
 
 <p align="center">
   <img src="./pose_estimation/gifs/pushup_form.gif" />
+  Form Checker
 </p>
 
 SportForm takes in video uploads from users and utilizes the model to generate the coordinates of keypoints. By analyzing these keypoints, we calculate the necessary angles and distances to accurately evaluate exercise form and count repetitions.
@@ -121,14 +123,14 @@ Other requirements will be installed together with YOLO by ultralytics, refer to
 
 Our script to generate video with annotations can be used from the Command Line Interface (CLI).
 
-1. Enter the directory `/path/to/sportform/pose_estimation
-`cd /path/to/sportform/pose_estimation`
-
+1. Enter the directory `/path/to/sportform/pose_estimation`
+   `cd /path/to/sportform/pose_estimation`
+   
 2. Try video generation with our example for pushups
-`python3 pushup_keypts.py -s=./pushup.mp4`
-
+   `python3 pushup_keypts.py -s=./pushup.mp4`
+   
 3. Try video generation with our example for situps
-`python3 situp_keypts.py -s=./situp.mp4`
+   `python3 situp_keypts.py -s=./situp.mp4`
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -145,7 +147,7 @@ to stay connected and work out with one another virtually. This creates a cohesi
 
 ## Contact
 
-Jeric Liew - [Linkedin](https://www.linkedin.com/in/jericlew) | [Github](https://github.com/JericLew)
+Jeric Lew - [Linkedin](https://www.linkedin.com/in/jericlew) | [Github](https://github.com/JericLew)
 
 Eiffel Leo - [LinkedIn](https://www.linkedin.com/in/eiffel-leo/) | [Github](https://github.com/JavonTeo)
 
