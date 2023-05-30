@@ -127,7 +127,8 @@ install ultralytics
 Our script to generate video with annotations can be used from the Command Line Interface (CLI).
 
 1. Enter the directory `/path/to/sportform/pose_estimation`
-   ```cd /path/to/sportform/pose_estimation
+   ```cd
+   /path/to/sportform/pose_estimation
    ```
    
 2. Try video generation with our example for pushups
