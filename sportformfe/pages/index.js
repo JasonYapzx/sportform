@@ -34,7 +34,7 @@ export default function Home() {
               Improve your form
             </h1>
             <p className="mb-4 xl:w-3/4 text-gray-600 text-lg">
-              Sportform is  free to use social sporting application, where you can connect
+              Sportform is a free to use social sporting application, where you can connect
               with other sportmen, receive feedback about your form and even join live workouts!
             </p>
             <div className="flex justify-center">
