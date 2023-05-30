@@ -36,7 +36,7 @@ export default function AboutUs() {
             </h1>
             <p className="mb-4 text-gray-600 text-lg">
               Sportform is built by 4 software developers who share a
-              deep-rooted passion for sports. As avid athletes ourselves, we've
+              deep-rooted passion for sports. As avid athletes ourselves, we have
               experienced firsthand the frustrations of trying to perfect our
               form and the lack of accessible resources that provide accurate
               feedback.
@@ -49,7 +49,7 @@ export default function AboutUs() {
               detailed feedback on your form and competency.
             </p>
             <p className="mb-4 text-gray-600 text-lg">
-              Together, let's revolutionize the way we approach fitness, one
+              Together, let us revolutionize the way we approach fitness, one
               video at a time. Welcome to Sportform, where your journey to
               excellence begins!
             </p>
